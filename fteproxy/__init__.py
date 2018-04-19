@@ -293,7 +293,7 @@ class _FTESocketWrapper(FTEHelper, object):
             raise socket.timeout
 
         return retval
-    
+
     def send(self, data):
         to_send = self._processSend()
         if to_send:
@@ -340,6 +340,7 @@ class _FTESocketWrapper(FTEHelper, object):
     def listen(self, N):
         return self._socket.listen(N)
 
+from fteproxy.ICSocketWrapper import _ICSocketWrapper
 
 def wrap_socket(sock,
                 outgoing_regex=None, outgoing_fixed_slice=-1,
@@ -361,7 +362,7 @@ def wrap_socket(sock,
     assert K1 == None or len(K1) == 16
     assert K2 == None or len(K2) == 16
 
-    socket_wrapped = _FTESocketWrapper(
+    socket_wrapped = _ICSocketWrapper(
         sock,
         outgoing_regex, outgoing_fixed_slice,
         incoming_regex, incoming_fixed_slice,
