@@ -21,7 +21,4 @@ and
 then use.
 
 
-Original Author
-------
-
-Please contact Kevin P. Dyer (kpdyer@gmail.com), if you have any questions.
+Credit goes to fteproxy's original author: Kevin P. Dyer
