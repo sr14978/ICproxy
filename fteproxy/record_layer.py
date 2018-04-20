@@ -7,7 +7,7 @@ import fte.encoder
 
 import fteproxy.conf
 from fte.encrypter import Encrypter
-
+import emulator.conf
 
 MAX_CELL_SIZE = fteproxy.conf.getValue('runtime.fteproxy.record_layer.max_cell_size')
 
@@ -35,9 +35,9 @@ class Encoder:
         retval = ''
 
         while len(self._buffer) > 0:
-            plaintext = self._buffer[:256-Encrypter._CTXT_EXPANSION]
+            plaintext = self._buffer[:emulator.conf.frag_plaintext_length]
             covertext = self._encoder.encode(plaintext)
-            self._buffer = self._buffer[256-Encrypter._CTXT_EXPANSION:]
+            self._buffer = self._buffer[emulator.conf.frag_plaintext_length:]
             retval += covertext
 
         return retval

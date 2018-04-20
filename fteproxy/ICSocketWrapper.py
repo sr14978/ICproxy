@@ -1,6 +1,8 @@
 import innocuous_ciphertexts.emulator as emulator
 import fteproxy.record_layer
 
+import emulator.conf
+
 class _ICSocketWrapper(object):
 
     def __init__(self, _socket,
@@ -26,7 +28,7 @@ class _ICSocketWrapper(object):
         self._preNegotiationBuffer_outgoing = ''
         self._preNegotiationBuffer_incoming = ''
 
-        enc,dec = emulator.init(just_URI=False, message_length=256, key_enc=K1, key_mac=K2)
+        enc,dec = emulator.init(just_URI=False, message_length=emulator.conf.frag_ciphertext_length, key_enc=K1, key_mac=K2)
         self._encoder = fteproxy.record_layer.Encoder(encoder=enc)
         self._decoder = fteproxy.record_layer.Decoder(decoder=dec)
 
