@@ -1,7 +1,7 @@
 import innocuous_ciphertexts.emulator as emulator
 import fteproxy.record_layer
 
-import emulator.conf
+import innocuous_ciphertexts.emulator.conf
 
 class _ICSocketWrapper(object):
 
