@@ -34,9 +34,9 @@ class Encoder:
         retval = ''
 
         while len(self._buffer) > 0:
-            plaintext = self._buffer[:MAX_CELL_SIZE]
+            plaintext = self._buffer[:256]
             covertext = self._encoder.encode(plaintext)
-            self._buffer = self._buffer[MAX_CELL_SIZE:]
+            self._buffer = self._buffer[256:]
             retval += covertext
 
         return retval
