@@ -76,6 +76,7 @@ class Decoder:
             try:
                 print "in================"
                 msg, buffer = self._decoder.decode(self._proxy_buffer)
+                if len(msg) == 0: break
                 self._length_dist_buffer.append(msg)
                 self._proxy_buffer = buffer
             except Exception as e:
