@@ -74,6 +74,7 @@ class Decoder:
         print "ppop---------------------------------------"
         while len(self._proxy_buffer) > 0:
             try:
+                print "in================"
                 msg, buffer = self._decoder.decode(self._proxy_buffer)
                 self._length_dist_buffer.append(msg)
                 self._proxy_buffer = buffer
