@@ -16,12 +16,8 @@ class Encoder:
 
     def __init__(
         self,
-        encrypter,
-        to_length_dist,
-        encoder,
+        encoder
     ):
-        self._encrypter = encrypter
-        self._to_length_dist = to_length_dist
         self._encoder = encoder
         self._clear_buffer = ''
         self._encrypted_buffer = []
@@ -41,11 +37,11 @@ class Encoder:
 
         while len(self._clear_buffer) > 0:
             plaintext = self._clear_buffer[:emulator.conf.frag_plaintext_length]
-            ciphertext = self._encrypter.encrypt(plaintext)
+            ciphertext = self._encoder.encrypt(plaintext)
             self._clear_buffer = self._clear_buffer[emulator.conf.frag_plaintext_length:]
             _encrypted_buffer.append(ciphertext)
 
-        self._length_dist_buffer = self._to_length_dist(self._encrypted_buffer)
+        self._length_dist_buffer = self._encoder.to_length_dist(self._encrypted_buffer)
         self._encrypted_buffer = []
 
         retval = "".join([self._encoder.encode(m) for m in self._length_dist_buffer])
@@ -58,12 +54,8 @@ class Decoder:
 
     def __init__(
         self,
-        decrypter,
-        from_length_dist,
-        decoder,
+        decoder
     ):
-        self._decrypter = decrypter
-        self._from_length_dist = from_length_dist
         self._decoder = decoder
         self._proxy_buffer = ''
         self._length_dist_buffer = []
@@ -92,9 +84,9 @@ class Decoder:
                 if oneCell:
                     break
 
-        self._encrypted_buffer, self._length_dist_buffer = self._from_length_dist(self._length_dist_buffer)
+        self._encrypted_buffer, self._length_dist_buffer = self._decoder.from_length_dist(self._length_dist_buffer)
 
-        retval = "".join([self._decrypter.decrypt(c) for c in self._encrypted_buffer])
+        retval = "".join([self._decoder.decrypt(c) for c in self._encrypted_buffer])
         self._encrypted_buffer = []
 
         return retval
