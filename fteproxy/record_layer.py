@@ -71,7 +71,7 @@ class Decoder:
         The returned value is decoded with ``_decoder`` then decrypted
         with ``_decrypter`` specified in ``__init__``.
         """
-
+        print "ppop---------------------------------------"
         while len(self._proxy_buffer) > 0:
             try:
                 msg, buffer = self._decoder.decode(self._proxy_buffer)
