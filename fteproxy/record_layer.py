@@ -7,7 +7,7 @@ import fte.encoder
 
 import fteproxy.conf
 from fte.encrypter import Encrypter
-import innocuous_ciphertexts.emulator.conf
+import innocuous_ciphertexts.emulator as emulator
 
 MAX_CELL_SIZE = fteproxy.conf.getValue('runtime.fteproxy.record_layer.max_cell_size')
 
