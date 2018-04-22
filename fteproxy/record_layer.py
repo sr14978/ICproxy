@@ -39,7 +39,7 @@ class Encoder:
             plaintext = self._clear_buffer[:emulator.conf.frag_plaintext_length]
             ciphertext = self._encoder.encrypt(plaintext)
             self._clear_buffer = self._clear_buffer[emulator.conf.frag_plaintext_length:]
-            _encrypted_buffer.append(ciphertext)
+            self._encrypted_buffer.append(ciphertext)
 
         self._length_dist_buffer = self._encoder.to_length_dist(self._encrypted_buffer)
         self._encrypted_buffer = []
