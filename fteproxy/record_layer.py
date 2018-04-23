@@ -22,6 +22,7 @@ class Encoder:
         self._clear_buffer = ''
         self._encrypted_buffer = []
         self._length_dist_buffer = []
+        self._ready_buffer = []
 
     def push(self, data):
         """Push data onto the FIFO buffer."""
@@ -44,9 +45,15 @@ class Encoder:
         self._length_dist_buffer = self._encoder.to_length_dist(self._encrypted_buffer)
         self._encrypted_buffer = []
 
-        retval = "".join([self._encoder.encode(m) for m in self._length_dist_buffer])
+        self._ready_buffer += [self._encoder.encode(m) for m in self._length_dist_buffer]
         self._length_dist_buffer = []
 
+        if self._ready_buffer:
+            retval = self._ready_buffer[0]
+            self._ready_buffer = self._ready_buffer[1:]
+        else:
+            retval = ''
+        
         return retval
 
 
