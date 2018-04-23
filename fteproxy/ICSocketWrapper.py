@@ -3,6 +3,8 @@ import fteproxy.record_layer
 
 import innocuous_ciphertexts.emulator.conf
 
+from fteproxy import *
+
 class _ICSocketWrapper(object):
 
     def __init__(self, _socket,
