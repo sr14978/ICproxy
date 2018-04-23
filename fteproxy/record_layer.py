@@ -53,7 +53,7 @@ class Encoder:
             self._ready_buffer = self._ready_buffer[1:]
         else:
             retval = ''
-        
+
         return retval
 
 
@@ -82,7 +82,7 @@ class Decoder:
         while len(self._proxy_buffer) > 0:
             try:
                 msg, buffer = self._decoder.decode(self._proxy_buffer)
-                if len(msg) == 0: break
+                if msg == None: break
                 self._length_dist_buffer += msg
                 self._proxy_buffer = buffer
             except Exception as e:
