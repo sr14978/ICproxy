@@ -44,10 +44,7 @@ class _ICSocketWrapper(object):
                 data = self._socket.recv(bufsize)
                 noData = (data == '')
 
-                if noData and not self._incoming_buffer
-                    and not self._decoder._proxy_buffer
-                    and not self._decoder._length_dist_buffer
-                    and not self._decoder._encrypted_buffer:
+                if noData and not self._incoming_buffer and not self._decoder._proxy_buffer and not self._decoder._length_dist_buffer and not self._decoder._encrypted_buffer:
                     return ''
 
                 self._decoder.push(data)
