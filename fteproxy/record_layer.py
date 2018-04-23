@@ -58,7 +58,7 @@ class Decoder:
     ):
         self._decoder = decoder
         self._proxy_buffer = ''
-        self._length_dist_buffer = []
+        self._length_dist_buffer = ''
         self._encrypted_buffer = []
 
     def push(self, data):
@@ -71,13 +71,12 @@ class Decoder:
         The returned value is decoded with ``_decoder`` then decrypted
         with ``_decrypter`` specified in ``__init__``.
         """
-        print "ppop---------------------------------------"
+
         while len(self._proxy_buffer) > 0:
             try:
-                print "in================"
                 msg, buffer = self._decoder.decode(self._proxy_buffer)
                 if len(msg) == 0: break
-                self._length_dist_buffer.append(msg)
+                self._length_dist_buffer += msg
                 self._proxy_buffer = buffer
             except Exception as e:
                 fteproxy.warn("fteproxy.record_layer exception: "+str(e))
