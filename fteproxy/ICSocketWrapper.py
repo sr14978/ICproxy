@@ -30,7 +30,7 @@ class _ICSocketWrapper(object):
         self._preNegotiationBuffer_outgoing = ''
         self._preNegotiationBuffer_incoming = ''
 
-        enc,dec = emulator.init(mode='proxy', just_URI=False, message_length=emulator.conf.frag_ciphertext_length, key_enc=K1, key_mac=K2)
+        enc,dec = emulator.init(mode='proxy', message_length=emulator.conf.frag_ciphertext_length, key_enc=K1, key_mac=K2)
         self._encoder = fteproxy.record_layer.Encoder(encoder=enc)
         self._decoder = fteproxy.record_layer.Decoder(decoder=dec)
 
